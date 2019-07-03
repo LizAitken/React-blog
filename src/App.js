@@ -1,24 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
+import * as Data from './data/fake_posts.json';
+
+import Header from './components/header.js';
+import ListLayout from './components/listLayout.js';
+import Footer from './components/footer.js';
+
+import Wrapper from './sharedComponents/wrapper.js';
 import './App.css';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App">     
+      <Header />
+      <Wrapper>
+        <ListLayout posts={Data}/>
+      </Wrapper>
+      <Footer />
     </div>
   );
 }
