@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/postDataStyle.css';
+
 
 const PostData = props => {
     const { postData } = props;
     return (
         <>
-            <h1>{postData.post_title}</h1>
-            <p>{postData.post}</p>
+            <div className='wrapper'>
+                <h1 className='title'>{postData.post_title}</h1>
+                <h5 className='subtitle'>Written By: {postData.first_name} {postData.last_name}</h5>
+                <p>{postData.post}</p>
+            </div>
+            
         </>
     );
 };
