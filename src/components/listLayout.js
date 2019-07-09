@@ -1,32 +1,37 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import PostData from './postData';
+import { Link } from 'react-router-dom';
 
 // Need to keep track of what has been clicked and what has not
 // Will manage the details view in this component
 
 const PostList = styled.ul`
     list-style-type: none;
-    flex: 0 1 25%;
-    text-align: left;
-    max-width: 25%;
     width: 100%;
-
+    columns: 4;
+    text-align: center;
 
 
     li {
-        padding: 4px 0;
-        margin: 4px 0;
-        width: 100%;
+        width: 10rem;
+        height: 10rem;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 3px solid black;
+        border-radius: 15px;
     }
-`;
 
-const PostDetails = styled.div`
-    margin: 0;
-    max-width: 75%;
-    width: 100%;
-    flex: 1;
+    li a {
+        text-decoration: none;
+        color: black;
+    }
+
+    li:hover {
+        background-color: grey;
+    }
 `;
 
 
@@ -46,37 +51,19 @@ class ListLayout extends Component {
         })
     }
 
-    loadPost = post => {
-        this.setState({
-            showDetails: true,
-            postData: post
-        });
-    };
-
-
     render () {
-        const { posts, showDetails, postData } = this.state;
+        const { posts } = this.state;
         return (
-            <>
-                <PostList>
-                    {posts.map((post, index) => {
-                        return (
-                            <li key={index}>
-                                <a href="#" onClick={() => this.loadPost(post)}>
-                                    {post.post_title}
-                                </a>
-                            </li>
-                        );
-                    })}
-                </PostList>
-                <PostDetails>
-                    {!!showDetails && !!postData ?
-                        <PostData postData={postData} />
-                    :
-                        <p>Please select an entry</p>
-                    }
-                </PostDetails>
-            </>
+                    <PostList>
+                        {posts.map((post, index) => {
+                            return (
+                                <li key={index}>
+                                    <Link to={`/post/${post.id}`}>{post.post_title}</Link>    
+                                </li>
+                            );
+                        })}
+                    </PostList>
+
         )
     }
     
